@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="co.datacap.mobiletokendemo.MainActivity"
+    tools:context="co.monetary.mobiletokendemo.MainActivity"
     android:gravity="center_horizontal">
 
     <ImageView
@@ -19,18 +19,19 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <Button
-            android:layout_below="@+id/imgLogo"
-            android:text="Get a Token!"
+            android:id="@+id/btnGetToken"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/btnGetToken"
+            android:layout_below="@+id/imgLogo"
             android:layout_gravity="center"
+            android:background="#778799"
             android:gravity="center"
             android:onClick="getTokenPressed"
-            android:background="@android:color/holo_blue_dark"
+            android:text="Get a Token!"
             android:textAllCaps="false"
-            android:textColor="@android:color/white"/>
+            android:textColor="@android:color/white" />
     </FrameLayout>
 
 </LinearLayout>

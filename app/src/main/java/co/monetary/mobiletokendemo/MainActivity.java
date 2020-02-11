@@ -1,4 +1,4 @@
-package co.datacap.mobiletokendemo;
+package co.monetary.mobiletokendemo;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
+import co.monetary.mobiletokendemo.R;
 import co.monetary.mobiletoken.*;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,7 +51,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void getTokenPressed(View v) {
         Intent tokenIntent = new Intent(this, MonetaryTokenizerActivity.class);
-        tokenIntent.putExtra("publicKey", "test_public00000000000000000000000000000006");
+        tokenIntent.putExtra("publicKey", "57869507bb3545e6871de996208b2bcf");
+        //"environment" should only be supplied when targeting the certification environment. When targeting production do not pass an environment.
+        tokenIntent.putExtra("environment", "cert");
         startActivityForResult(tokenIntent, MonetaryTokenizerActivity.MONETARY_TOKENIZER_REQUEST);
     }
 
