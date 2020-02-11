@@ -73,6 +73,8 @@ The `MonetaryTokenizationError` object's member `errorCode` is an enum of 4 poss
 ```java
 Intent tokenIntent = new Intent(this, MonetaryTokenizerActivity.class);
 tokenIntent.putExtra("publicKey", "[Public Key Goes Here]");
+//"environment" should only be supplied when targeting the certification environment. When targeting production do not pass an environment.
+tokenIntent.putExtra("environment", "cert");
 startActivityForResult(tokenIntent, MonetaryTokenizerActivity.MONETARY_TOKENIZER_REQUEST);
 ```
 
