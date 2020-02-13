@@ -1,4 +1,4 @@
-package co.monetary.mobiletokendemo;
+package co.datacap.mobiletokendemo;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
-import co.monetary.mobiletokendemo.R;
-import co.monetary.mobiletoken.*;
+import co.datacap.mobiletokendemo.R;
+import co.datacap.mobiletoken.*;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,25 +21,25 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == MonetaryTokenizerActivity.MONETARY_TOKENIZER_REQUEST)
+        if (requestCode == DatacapTokenizerActivity.DATACAP_TOKENIZER_REQUEST)
         {
-            if (resultCode == MonetaryTokenizerActivity.RESULT_SUCCESS)
+            if (resultCode == DatacapTokenizerActivity.RESULT_SUCCESS)
             {
-                MonetaryToken token = (MonetaryToken)data.getSerializableExtra("token");
+                DatacapToken token = (DatacapToken)data.getSerializableExtra("token");
                 new AlertDialog.Builder(this)
                         .setTitle("Token Response")
                         .setMessage("Token: " + token.token + "\nLast 4: " + token.last4 + "\nExp Month: " + token.expirationMonth + "\nExp Year: " + token.expirationYear + "\nBrand: " + token.brand)
                         .setNeutralButton("OK", null).show();
             }
-            else if (resultCode == MonetaryTokenizerActivity.RESULT_ERROR)
+            else if (resultCode == DatacapTokenizerActivity.RESULT_ERROR)
             {
-                MonetaryTokenizationError error = (MonetaryTokenizationError)data.getSerializableExtra("error");
+                DatacapTokenizationError error = (DatacapTokenizationError)data.getSerializableExtra("error");
                 new AlertDialog.Builder(this)
                         .setTitle("Tokenization Error")
                         .setMessage("Error Code: " + error.errorCode.toString() + "\nError Message: " + error.errorMessage)
                         .setNeutralButton("OK", null).show();
             }
-            else if (resultCode == MonetaryTokenizerActivity.RESULT_CANCELED)
+            else if (resultCode == DatacapTokenizerActivity.RESULT_CANCELED)
             {
                 new AlertDialog.Builder(this)
                         .setTitle("Tokenization Cancelled")
@@ -50,11 +50,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getTokenPressed(View v) {
-        Intent tokenIntent = new Intent(this, MonetaryTokenizerActivity.class);
+        Intent tokenIntent = new Intent(this, DatacapTokenizerActivity.class);
         tokenIntent.putExtra("publicKey", "57869507bb3545e6871de996208b2bcf");
         //"environment" should only be supplied when targeting the certification environment. When targeting production do not pass an environment.
         tokenIntent.putExtra("environment", "cert");
-        startActivityForResult(tokenIntent, MonetaryTokenizerActivity.MONETARY_TOKENIZER_REQUEST);
+        startActivityForResult(tokenIntent, DatacapTokenizerActivity.DATACAP_TOKENIZER_REQUEST);
     }
 
 }

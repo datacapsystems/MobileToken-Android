@@ -22,28 +22,28 @@
 
 ### Include the library in your code
 ```java
-import co.monetary.mobiletoken.*;
+import datacap.mobiletoken.*;
 ```
 
 ### Implement tokenization result handler
-##### Implement `onActivityResult` for `MonetaryTokenizerActivity.MONETARY_TOKENIZER_REQUEST` requestCode
+##### Implement `onActivityResult` for `DatacapTokenizerActivity.DATACAP_TOKENIZER_REQUEST` requestCode
 ```java
 @Override
 protected void onActivityResult(int requestCode, int resultCode, Intent data)
 {
-    if (requestCode == MonetaryTokenizerActivity.MONETARY_TOKENIZER_REQUEST)
+    if (requestCode == DatacapTokenizerActivity.DATACAP_TOKENIZER_REQUEST)
     {
-        if (resultCode == MonetaryTokenizerActivity.RESULT_SUCCESS)
+        if (resultCode == DatacapTokenizerActivity.RESULT_SUCCESS)
         {
             // A token has been received!
-            MonetaryToken token = (MonetaryToken)data.getSerializableExtra("token");
+            DatacapToken token = (DatacapToken)data.getSerializableExtra("token");
         }
-        else if (resultCode == MonetaryTokenizerActivity.RESULT_ERROR)
+        else if (resultCode == DatacapTokenizerActivity.RESULT_ERROR)
         {
             // A tokenization error has occurred!
-            MonetaryTokenizationError error = (MonetaryTokenizationError)data.getSerializableExtra("error");
+            DatacapTokenizationError error = (DatacapTokenizationError)data.getSerializableExtra("error");
         }
-        else if (resultCode == MonetaryTokenizerActivity.RESULT_CANCELED)
+        else if (resultCode == DatacapTokenizerActivity.RESULT_CANCELED)
         {
             // The user has cancelled tokenization!
         }
@@ -51,31 +51,31 @@ protected void onActivityResult(int requestCode, int resultCode, Intent data)
 }
 ```
 
-For the `MonetaryTokenizerActivity.RESULT_SUCCESS` resultCode, the received Intent contains a `MonetaryToken` object named `"token"` that contains 5 String members:  
+For the `DatacapTokenizerActivity.RESULT_SUCCESS` resultCode, the received Intent contains a `DatacapToken` object named `"token"` that contains 5 String members:
 * `token`: The one-time-use token for the user-entered account data.
 * `brand`: The card brand of account represented by the token.
 * `expirationMonth`: The 2-digit expiration month of the account.
 * `expirationYear`: The 4-digit expiration year of the account.
 * `last4`: The last 4 digits of the account number.
 
-For the `MonetaryTokenizerActivity.RESULT_ERROR` resultCode, the received Intent contains a `MonetaryTokenizationError` object named `"error"` that contains 2 members:  
-* `errorCode`: The MonetaryMobileToken error code.
+For the `DatacapTokenizerActivity.RESULT_ERROR` resultCode, the received Intent contains a `DatacapTokenizationError` object named `"error"` that contains 2 members:
+* `errorCode`: The DatacapMobileToken error code.
 * `errorMessage`: The error description.
 
-The `MonetaryTokenizationError` object's member `errorCode` is an enum of 4 possible values:
+The `DatacapTokenizationError` object's member `errorCode` is an enum of 4 possible values:
 * `ErrorCodes.CONNECTION_ERROR`: Failed to communicate with Datacap Token API.
 * `ErrorCodes.AUTHENTICATION_ERROR`: Public key authentication failed.
 * `ErrorCodes.VALIDATION_ERROR`: Failed to tokenize due to invalid account information.
 * `ErrorCodes.UNKNOWN_ERROR`: An error has occurred tokenizing the account data at the Datacap Token API.
 
 ### Request a token for keyed account
-##### Create an Intent for `MonetaryTokenizerActivity` and provide a Datacap public key as an extra named `"publicKey"` then start activity for result with the Intent
+##### Create an Intent for `DatacapTokenizerActivity` and provide a Datacap public key as an extra named `"publicKey"` then start activity for result with the Intent
 ```java
-Intent tokenIntent = new Intent(this, MonetaryTokenizerActivity.class);
+Intent tokenIntent = new Intent(this, DatacapTokenizerActivity.class);
 tokenIntent.putExtra("publicKey", "[Public Key Goes Here]");
 //"environment" should only be supplied when targeting the certification environment. When targeting production do not pass an environment.
 tokenIntent.putExtra("environment", "cert");
-startActivityForResult(tokenIntent, MonetaryTokenizerActivity.MONETARY_TOKENIZER_REQUEST);
+startActivityForResult(tokenIntent, DatacapTokenizerActivity.DATACAP_TOKENIZER_REQUEST);
 ```
 
 ### Report bugs
