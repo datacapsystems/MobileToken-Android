@@ -2,12 +2,11 @@ package co.datacap.mobiletokendemo;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
-import co.datacap.mobiletokendemo.R;
 import co.datacap.mobiletoken.*;
 
 public class MainActivity extends AppCompatActivity {
